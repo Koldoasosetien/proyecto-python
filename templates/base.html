@@ -13,6 +13,7 @@
             <ul>
                 {% if not session['nombre'] %}
                 <li><a href="{{ url_for('login.login') }}">Iniciar Sesion</a></li>
+                <li><a href="{{ url_for('signin.signin') }}">Crear Cuenta</a></li>
                 {% endif %}
                 {% if session['nombre'] %}
                 <li><a href="{{ url_for('logout.logout') }}"> Cerrar Sesion</a></li>
