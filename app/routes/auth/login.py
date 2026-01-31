@@ -16,10 +16,10 @@ def login():
         if usuario and usuario.password == password:
             flask_session["usuario_id"] = usuario.id
             flask_session["nombre"] = usuario.nombre
+            flask_session["admin"] = usuario.admin
             
             return redirect(url_for("libros.ver_libros"))
         else:
             flash("Credenciales incorrectas", "error")
-
 
     return render_template("login/login.html")

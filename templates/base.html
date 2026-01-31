@@ -1,41 +1,47 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-    <meta charset='utf-8'>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta charset="utf-8">
     <title>{% block title %}{% endblock %}</title>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href="{{ url_for('static', filename='css/styles.css') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
-    <header>
-    <nav>
-            <ul>
-                {% if not session['nombre'] %}
-                <li><a href="{{ url_for('login.login') }}">Iniciar Sesion</a></li>
-                <li><a href="{{ url_for('signin.signin') }}">Crear Cuenta</a></li>
-                {% endif %}
-                {% if session['nombre'] %}
-                <li><a href="{{ url_for('logout.logout') }}"> Cerrar Sesion</a></li>
-                {% endif %}
-            </ul>
-        </nav>
-        
-    </header>
-    <main>
-        {% with messages = get_flashed_messages(with_categories=true) %}
-            {% if messages %}
-                <div class="mensajes">
-                {% for category, message in messages %}
-                    <div class="mensaje">
-                        <p>{{message}}</p>
-                    </div>
-                {% endfor %}                  
-                </div>
-            {% endif %}
-            {% block content %} {% endblock %}
 
-        {% endwith %}
-    </main>
+<header>
+    <nav>
+        <ul>
+            {% if not session.get('nombre') %}
+                <li><a href="{{ url_for('login.login') }}">Iniciar sesión</a></li>
+                <li><a href="{{ url_for('signin.signin') }}">Crear cuenta</a></li>
+            {% else %}
+                <li><a href="{{ url_for('libros.ver_libros') }}">Libros</a></li>
+
+                {% if session.get('admin') %}
+                    <li><a href="{{ url_for('admin.adminpanel') }}">Panel Admin</a></li>
+                {% endif %}
+
+                <li><a href="{{ url_for('logout.logout') }}">Cerrar sesión</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+</header>
+
+<main>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="mensajes">
+                {% for category, message in messages %}
+                    <div class="mensaje {{ category }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    {% block content %}{% endblock %}
+</main>
+
 </body>
 </html>

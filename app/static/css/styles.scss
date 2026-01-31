@@ -147,6 +147,27 @@ form {
     }
 }
 
+// TABLAS
+table {
+    border: solid black 3px;
+    border-radius: 5px;
+    border-collapse: collapse;
+    margin: auto;
+    td, th {
+        border: solid black 1px;
+        padding: 3px;
+        background-color: $colorSecondary;
+        a {
+            text-decoration: none;
+            color: $colorBold;
+            transition: all 0.2s;
+            &:hover {
+                color: blue;
+            }
+        }
+    }
+}
+
 // MENSAJES
 .mensajes {
     background-color: $colorMenu;

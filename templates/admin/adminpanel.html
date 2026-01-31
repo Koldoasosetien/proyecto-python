@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block title %}Panel Admin{% endblock %}
+
+{% block content %}
+<h1>Panel de Administración</h1>
+
+<h2>Reservas</h2>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Usuario</th>
+        <th>Libro</th>
+        <th>Fecha</th>
+        <th>Devuelto</th>
+        <th>Acción</th>
+    </tr>
+    {% for r in reservas %}
+    <tr>
+        <td>{{ r.id }}</td>
+        <td>{{ r.usuario_id }}</td>
+        <td>{{ r.libros_id }}</td>
+        <td>{{ r.fechaprestamos }}</td>
+        <td>{{ "Sí" if r.devuelto else "No" }}</td>
+        <td>
+            {% if not r.devuelto %}
+                <a href="{{ url_for('admin.devolver_reserva', id_reserva=r.id) }}">
+                    Devolver
+                </a>
+            {% endif %}
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+<h2>Usuarios</h2>
+<table id="tablaUsuarios" class="tablaUsuarios">
+    <tr>
+        <td colspan="5"><input type="text" id="buscadorUsuarios" placeholder="Buscar usuario..."></td>
+    </tr>
+    <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Email</th>
+        <th>Admin</th>
+        <th>Acción</th>
+    </tr>
+    {% for u in usuarios %}
+    <tr>
+        <td>{{ u.id }}</td>
+        <td>{{ u.nombre }}</td>
+        <td>{{ u.email }}</td>
+        <td>{{ "Sí" if u.admin else "No" }}</td>
+        <td>
+            {% if not u.admin %}
+                <a href="{{ url_for('admin.borrar_usuario', id_usuario=u.id) }}">
+                    Borrar
+                </a>
+            {% endif %}
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+<script src="{{ url_for('static', filename='js/search.js') }}"></script>
+{% endblock %}

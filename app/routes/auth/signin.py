@@ -16,7 +16,6 @@ def signin():
         email = request.form.get("email")
         password = request.form.get("password")
 
-        # Validación básica
         if not nombre or not apellidos or not email or not password:
             flash("Todos los campos son obligatorios", "error")
             return redirect(url_for("signin.signin"))

@@ -25,5 +25,4 @@ def reservar():
     else:
         flash('Reserva realizada con exita.', 'success')
 
-
     return redirect(url_for("libros.ver_libros"))
