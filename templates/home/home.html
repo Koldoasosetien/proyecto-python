@@ -1,10 +1,19 @@
-{% extends "base.html" %} {% block title %} Home {% endblock %} 
-{% block content %}
-    <h1>Bienvenido {{session['nombre']}}</h1>
-    {%for libro in lista_libros  %}
+{% extends "base.html" %}
+{% block title %} Home {% endblock %}
 
-    <p>{{libro.titulo }}</p>
-    <img src="{{ url_for('static', filename='images/' + libro.imagen) }}" alt="">
-    <a href="{{ url_for('reservas.reservar', id=libro.id) }}">Reservar</a>
-    {%endfor%}
+{% block content %}
+<h1>Bienvenido {{ session['nombre'] }}</h1>
+
+<div class="grid-libros">
+    {% for libro in lista_libros %}
+    <div class="card-libro">
+        <p class="titulo">{{ libro.titulo }}</p>
+        <img src="{{ url_for('static', filename='images/' + libro.imagen) }}" alt="">
+        <p class="descripcion">
+            {{ libro.descripcion | truncate(100, True, '...') }}
+        </p>
+        <a href="{{ url_for('reservas.reservar', id=libro.id) }}">Reservar</a>
+    </div>
+    {% endfor %}
+</div>
 {% endblock %}

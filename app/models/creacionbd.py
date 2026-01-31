@@ -57,13 +57,32 @@ class GestionarBiblioteca:
         cursor = self.conexion.cursor()
         
         cursor.execute('''
-            INSERT  INTO libros (`id`, `titulo`, `copias`, `imagen`, `autor`, `copiasPrestadas`, `descripcion`) VALUES
-            (1, 'La Biblia', 10, 'biblia.png', '', 1, 'Descripción de la biblia...'),
-            (5, 'Clean Code', 8, 'cleancode.png', 'Robert C. Martin', 0, 'Buenas prácticas...'),
-            (6, 'Breve historia del tiempo', 5, 'tiempo.png', 'Stephen Hawking', 0, 'Cosmología...'),
-            (7, 'Harry Potter', 10, 'hp1.png', 'J.K. Rowling', 0, 'Mago...'),
-            (8, 'PHP y MySQL', 7, 'phpmysql.png', 'Jon Duckett', 0, 'Desarrollo web...')
+            INSERT INTO libros (`id`, `titulo`, `copias`, `imagen`, `autor`, `copiasPrestadas`, `descripcion`) VALUES
+            (1, 'La Biblia', 10, 'biblia.png', 'Varios autores', 1,
+            'Texto sagrado compuesto por el Antiguo y el Nuevo Testamento. Recopila relatos históricos, leyes, profecías, poesía y enseñanzas morales que han influido profundamente en la cultura, la ética y la historia de la humanidad durante siglos.'),
+
+            (5, 'Clean Code', 8, 'cleancode.png', 'Robert C. Martin', 0,
+            'Guía esencial para programadores que desean escribir código limpio, legible y mantenible. El autor presenta principios, patrones y buenas prácticas para mejorar la calidad del software y facilitar su evolución a largo plazo.'),
+
+            (6, 'Breve historia del tiempo', 5, 'tiempo.png', 'Stephen Hawking', 0,
+            'Obra de divulgación científica que explora los grandes misterios del universo: el origen del cosmos, los agujeros negros, la naturaleza del tiempo y las leyes fundamentales de la física, explicadas de forma accesible para el público general.'),
+
+            (7, 'Harry Potter y la piedra filosofal', 10, 'hp1.png', 'J.K. Rowling', 0,
+            'Primera entrega de la famosa saga fantástica. Narra la historia de un joven mago que descubre su verdadero origen y comienza su formación en Hogwarts, iniciando una aventura llena de magia, amistad y peligros ocultos.'),
+
+            (8, 'PHP y MySQL', 7, 'phpmysql.png', 'Jon Duckett', 0,
+            'Manual práctico y visual para aprender a crear aplicaciones web dinámicas utilizando PHP y bases de datos MySQL. Ideal para principiantes y desarrolladores que quieren construir proyectos reales desde cero.'),
+
+            (9, 'El señor de los anillos', 6, 'lotr.png', 'J.R.R. Tolkien', 1,
+            'Épica obra de fantasía ambientada en la Tierra Media. Sigue la misión de destruir un anillo de poder capaz de dominar el mundo, explorando temas como la amistad, el sacrificio y la lucha entre el bien y el mal.'),
+
+            (10, 'El hobbit', 8, 'hobbit.png', 'J.R.R. Tolkien', 0,
+            'Precuela de El Señor de los Anillos. Relata el viaje de Bilbo Bolsón, un hobbit corriente que se ve envuelto en una aventura extraordinaria con enanos y un mago, enfrentándose a dragones y criaturas legendarias.'),
+
+            (11, '1984', 9, '1984.png', 'George Orwell', 2,
+            'Novela distópica que presenta una sociedad controlada por un régimen totalitario. A través de la vigilancia constante y la manipulación de la información, el autor reflexiona sobre la libertad, el poder y la pérdida de la identidad individual.')
         ''')
+
 
         cursor.execute('''
             INSERT  INTO usuarios (`id`, `nombre`, `apellidos`, `email`, `password`, `direccion`, `admin`) VALUES
