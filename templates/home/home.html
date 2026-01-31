@@ -1,0 +1,10 @@
+{% extends "base.html" %} {% block title %} Home {% endblock %} 
+{% block content %}
+    <h1>Bienvenido {{session['nombre']}}</h1>
+    {%for libro in lista_libros  %}
+
+    <p>{{libro.titulo }}</p>
+    <img src="{{ url_for('static', filename='images/' + libro.imagen) }}" alt="">
+    <a href="{{ url_for('reservas.reservar', id=libro.id) }}">Reservar</a>
+    {%endfor%}
+{% endblock %}

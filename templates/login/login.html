@@ -1,0 +1,35 @@
+{% extends "base.html" %} {% block title %} Iniciar Sesion {% endblock %} {%
+block content %}
+<h1>Iniciar Sesion</h1>
+<div class="card">
+  <form method="post" action="{{ url_for('login.login') }}">
+    <table>
+      <tr>
+        <td><label for="email"> Email de Usuario </label></td>
+        <td>
+          <input
+            type="text"
+            name="email"
+            id="email"
+            placeholder="Introduzca su correo electronico"
+          />
+        </td>
+      </tr>
+      <tr>
+        <td><label for="password">Contraseña de Usuario</label></td>
+        <td>
+          <input
+            type="password"
+            name="password"
+            id="password"
+            placeholder="Introduzca su contraseña"
+          />
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2"><input type="submit" value="Iniciar Sesion"></td>
+      </tr>
+    </table>
+  </form>
+</div>
+{% endblock %}

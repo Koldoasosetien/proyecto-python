@@ -1,0 +1,59 @@
+$colorPrincipal: #ffd29d;
+$colorSecondary: #FFB563;
+$colorCardBg: #918450;
+$colorMenu: #F85E00; 
+$colorBold: #A41623;
+$colorBorders: rgb(212, 0, 0);
+
+:root {
+    margin: 0px;
+}
+
+body {
+    margin: 0px;
+    background-color: $colorPrincipal;
+    nav {
+        background-color: $colorMenu;
+        display: flex;
+        flex-direction: row-reverse;
+        border-bottom: solid 1px $colorBorders;
+        ul {
+            display: flex;
+            width: 100%;
+            flex-direction: row;
+            justify-content: space-between;
+            margin: 5px;
+            li {
+                list-style: none;
+                a {
+                    padding: 15px;
+                }
+            }
+        }
+    }
+}
+
+form {
+    input {
+        width: 90%;
+        &:focus {
+            border: $colorBorders;
+        }
+    }
+}
+
+.mensajes {
+    background-color: $colorMenu;
+    padding: 5px;
+    width: 100%;
+    .mensaje{
+        width: 90%;
+        margin: auto;
+        background-color: $colorBold;
+        color: $colorPrincipal;
+        padding: 5px;
+        p {
+            text-align: center;
+        }
+    }
+}
