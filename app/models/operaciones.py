@@ -86,10 +86,36 @@ class Operaciones:
             session.rollback()
             return False
 
+    def mostrarReservas(self):
+        return session.query(Prestamos).all()
 
+    def devolverReserva(self, id_reserva):
+        try:
+            prestamo = session.query(Prestamos).filter(Prestamos.id == id_reserva).first()
+            if prestamo and not prestamo.devuelto:
+                prestamo.devuelto = True
 
+                libro = session.query(Libro).filter(Libro.id == prestamo.libros_id).first()
+                libro.copiasPrestadas -= 1
 
+                session.commit()
+                return True
+        except Exception as e:
+            print ("error")
+            session.rollback()
+            return False
 
+    def borrarUsuario(self, id_usuario):
+        try:
+            usuario = session.query(Usuarios).filter(Usuarios.id == id_usuario).first()
+            if usuario and not usuario.admin:
+                session.delete(usuario)
+                session.commit()
+                return True
+            return False
+        except Exception as e:
+            session.rollback()
+            return False
 
 
 if __name__=="__main__":

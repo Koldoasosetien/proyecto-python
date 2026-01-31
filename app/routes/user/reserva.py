@@ -1,7 +1,7 @@
 from flask import Blueprint, redirect, url_for, flash, session, request 
 from app.models.operaciones import Operaciones
 
-reservas_bp = Blueprint('reservas', __name__, template_folder="../../templates")
+reservas_bp = Blueprint('reservas', __name__, template_folder="../../../templates")
 
 @reservas_bp.route("/reservas", methods=["GET"])
 def reservar():

@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash, session as flask_session
 from app.models.operaciones import Operaciones
 
-signin_bp = Blueprint('signin', __name__, template_folder="../../templates")
+signin_bp = Blueprint('signin', __name__, template_folder="../../../templates")
 
 @signin_bp.route("/signin", methods=["GET", "POST"])
 def signin():

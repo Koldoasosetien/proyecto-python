@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, session as flask_session, redirect, url_for
 from app.models.operaciones import Operaciones
 
-libros_bp = Blueprint('libros', __name__, template_folder="../../templates")
+libros_bp = Blueprint('libros', __name__, template_folder="../../../templates")
 
 @libros_bp.route("/libros", methods=["GET"])
 def ver_libros():

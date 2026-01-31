@@ -2,7 +2,7 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash, session as flask_session
 from app.models.operaciones import Operaciones
 
-iniciarSesion_bp = Blueprint('login', __name__, template_folder="../../templates")
+iniciarSesion_bp = Blueprint('login', __name__, template_folder="../../../templates")
 
 @iniciarSesion_bp.route("/", methods=["GET", "POST"])
 def login():
