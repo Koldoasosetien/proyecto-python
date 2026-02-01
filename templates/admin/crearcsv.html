@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %} Exportar CSV {% endblock %}
+
+{% block content %}
+<h1>Bienvenido {{ session['nombre'] }}</h1>
+<h2>Exportar CSV</h2>
+    <!-- {% if  get_flashed_messages("msg") %}
+        {{get_flashed_messages("msg")}}
+    {% endif%} -->
+   <!-- POner los datos qeu se van a exporetar -->
+    <table>
+    <tr>
+        <th>ID</th>
+        <th>Usuario</th>
+        <th>Libro</th>
+        <th>Fecha</th>
+        <th>Devuelto</th>
+    </tr>
+    {% for r in reservas %}
+    <tr>
+        <td>{{ r.id }}</td>
+        <td>{{ r.usuario_id }}</td>
+        <td>{{ r.libros_id }}</td>
+        <td>{{ r.fechaprestamos }}</td>
+        <td>{{r.devuelto}}</td>
+       
+    </tr>
+    {% endfor %}
+</table>
+    <a href="{{ url_for('admin.CrearCsv')}}">Crear CSV</a>
+
+{% endblock %}

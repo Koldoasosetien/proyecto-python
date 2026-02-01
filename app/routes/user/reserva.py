@@ -1,4 +1,4 @@
-from flask import Blueprint, redirect, url_for, flash, session, request 
+from flask import Blueprint, redirect, url_for, flash, session, request ,render_template
 from app.models.operaciones import Operaciones
 
 reservas_bp = Blueprint('reservas', __name__, template_folder="../../../templates")
@@ -26,3 +26,11 @@ def reservar():
         flash('Reserva realizada con exita.', 'success')
 
     return redirect(url_for("libros.ver_libros"))
+
+
+@reservas_bp.route("/verReservas", methods=["GET"])
+def ver_reservas():
+    op = Operaciones()
+    idUsu=op.mostrarReservasUsu(session.get('usuario_id'))
+    return render_template("verReservas.html",reservasUsu=idUsu)
+    

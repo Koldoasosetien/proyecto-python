@@ -15,10 +15,15 @@
                 <li><a href="{{ url_for('login.login') }}">Iniciar sesión</a></li>
                 <li><a href="{{ url_for('signin.signin') }}">Crear cuenta</a></li>
             {% else %}
-                <li><a href="{{ url_for('libros.ver_libros') }}">Libros</a></li>
+
+                <li><a href="{{ url_for('libros.ver_libros') }}">Ver Libro</a></li>
 
                 {% if session.get('admin') %}
                     <li><a href="{{ url_for('admin.adminpanel') }}">Panel Admin</a></li>
+                    <li><a href="{{ url_for('admin.mostrarCsv') }}">Importar csv</a></li>
+                {% else %}
+                        <li><a href="{{ url_for('reservas.ver_reservas') }}">Ver Reservas</a></li>
+
                 {% endif %}
 
                 <li><a href="{{ url_for('logout.logout') }}">Cerrar sesión</a></li>

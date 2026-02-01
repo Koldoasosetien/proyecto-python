@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, redirect, url_for, session as flask_session, flash
 from app.models.operaciones import Operaciones
 from app.models.tablas import Usuarios
+import csv
 
 admin_bp = Blueprint("admin", __name__, template_folder="../../../templates")
 
@@ -24,7 +25,7 @@ def devolver_reserva(id_reserva):
     else:
         flash("No se pudo devolver la reserva", "error")
 
-    return redirect(url_for("admin.adminpanel_bp"))
+    return redirect(url_for("admin.adminpanel"))
 
 
 @admin_bp.route("/admin/borrar_usuario/<int:id_usuario>")
@@ -35,4 +36,27 @@ def borrar_usuario(id_usuario):
     else:
         flash("No se pudo borrar el usuario", "error")
 
-    return redirect(url_for("admin.adminpanel_bp"))
+    return redirect(url_for("admin.adminpanel"))
+
+
+@admin_bp.route("/admincsv")
+def mostrarCsv():
+    reservas = Operaciones.mostrarReservas()
+    return render_template("admin/crearcsv.html",reservas=reservas)
+
+
+@admin_bp.route("/creaRadmincsv")
+def CrearCsv():
+    reservas = Operaciones.mostrarReservas()
+    if reservas:
+        with open("reservas.csv", "w", newline='', encoding="utf-8") as f:
+            campos = ["ID", "Usuario ID", "Libro ID", "Fecha Prestamo", "Devuelto"]
+            escritor = csv.DictWriter(f, fieldnames=campos)
+            escritor.writeheader()
+            for r in reservas:
+                escritor.writerow({"ID": r.id,"Usuario ID": r.usuario_id, "Libro ID": r.libros_id,"Fecha Prestamo": r.fechaprestamos,"Devuelto": r.devuelto})
+                
+        flash("CSV Creado", "msg")
+    else:
+        flash("CSV no creado, No hay suficiente informacion", "msg")
+    return redirect(url_for("admin.adminpanel"))

@@ -10,7 +10,7 @@
         <p class="titulo">{{ libro.titulo }}</p>
         <img src="{{ url_for('static', filename='images/' + libro.imagen) }}" alt="">
         <p class="descripcion">
-            {{ libro.descripcion | truncate(100, True, '...') }}
+            {{ libro.descripcion }}
         </p>
         <a href="{{ url_for('reservas.reservar', id=libro.id) }}">Reservar</a>
     </div>

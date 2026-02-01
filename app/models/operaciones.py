@@ -7,7 +7,8 @@ from datetime import date
 class Operaciones:
 
     # Cosas
-    def crear_usuario(self, nombre, email, password,apellidos):
+    @staticmethod
+    def crear_usuario(nombre, email, password,apellidos):
         nuevoUsu= Usuarios(nombre=nombre, email=email, password=password, admin=False,apellidos=apellidos)
         try:
             session.add(nuevoUsu)
@@ -20,7 +21,8 @@ class Operaciones:
             return False
         
 
-    def eliminar_usuario(self,usuario_Id):
+    @staticmethod
+    def eliminar_usuario(usuario_Id):
         usuario=session.query(Usuarios).filter_by(Usuarios.id==usuario_Id).first()
         try:
             if(usuario):
@@ -35,7 +37,8 @@ class Operaciones:
             return False
         
 
-    def modificar_usuario(self,id_usuario,nombre, apellidos, email, password, direccion):
+    @staticmethod
+    def modificar_usuario(id_usuario,nombre, apellidos, email, password, direccion):
 
         try:
             session.query(Usuarios).filter_by(Usuarios.id==id_usuario).update({"nombre":nombre, "apellidos":apellidos, "email":email,"password":password, "direccion":direccion })
@@ -54,19 +57,22 @@ class Operaciones:
 
 
 # Mostrar
-    def mostrarUsu(self):
+    @staticmethod
+    def mostrarUsu():
         usuarios=session.query(Usuarios).all()
         print(usuarios)
         return usuarios
 
-    def mostrarLibro(self):
+    @staticmethod
+    def mostrarLibro():
         libros=session.query(Libro).all()
         print(libros)
         return libros
 
 
 
-    def realizarReserva(self, id_libro, id_usuario):
+    @staticmethod
+    def realizarReserva(id_libro, id_usuario):
         try:
 
             tieneLibro = session.query(Prestamos).filter(Prestamos.libros_id == id_libro, Prestamos.usuario_id == id_usuario,Prestamos.devuelto == False).first()
@@ -86,10 +92,33 @@ class Operaciones:
             session.rollback()
             return False
 
-    def mostrarReservas(self):
+    @staticmethod
+    def mostrarReservas():
         return session.query(Prestamos).all()
+    
 
-    def devolverReserva(self, id_reserva):
+    @staticmethod
+    def mostrarLibroUsu(idLibro):
+        libros=session.query(Libro).filter(Libro.id==idLibro).first()
+        print(libros)
+        return libros
+    
+    @staticmethod
+    def mostrarReservasUsu(idUsu):
+        tieneReservas=session.query(Prestamos).filter(Prestamos.usuario_id==idUsu).all()
+        listaLibros=list()
+        if tieneReservas:
+           for reserva in tieneReservas:
+               listaLibros.append(Operaciones.mostrarLibroUsu(reserva.libros_id))
+        return listaLibros
+
+  
+
+
+
+
+    @staticmethod
+    def devolverReserva(id_reserva):
         try:
             prestamo = session.query(Prestamos).filter(Prestamos.id == id_reserva).first()
             if prestamo and not prestamo.devuelto:
@@ -105,7 +134,8 @@ class Operaciones:
             session.rollback()
             return False
 
-    def borrarUsuario(self, id_usuario):
+    @staticmethod
+    def borrarUsuario(id_usuario):
         try:
             usuario = session.query(Usuarios).filter(Usuarios.id == id_usuario).first()
             if usuario and not usuario.admin:
