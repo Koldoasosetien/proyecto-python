@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, redirect, url_for, session as flask_session, flash
+from flask import Blueprint, render_template, redirect, url_for, send_file, session as flask_session, flash
 from app.models.operaciones import Operaciones
 from app.models.tablas import Usuarios
 import csv
@@ -55,8 +55,15 @@ def CrearCsv():
             escritor.writeheader()
             for r in reservas:
                 escritor.writerow({"ID": r.id,"Usuario ID": r.usuario_id, "Libro ID": r.libros_id,"Fecha Prestamo": r.fechaprestamos,"Devuelto": r.devuelto})
-                
         flash("CSV Creado", "msg")
     else:
         flash("CSV no creado, No hay suficiente informacion", "msg")
     return redirect(url_for("admin.adminpanel"))
+
+@admin_bp.route("/admin/descargarCsv")
+def descargarCsv():
+    return send_file(
+        "../reservas.csv",
+        as_attachment=True,
+        download_name="reservas.csv"
+    )
