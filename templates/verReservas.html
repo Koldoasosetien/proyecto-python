@@ -4,19 +4,19 @@
 {% block content %}
 <h1>Bienvenido {{ session['nombre'] }}</h1>
 <h2>Libros reservados</h2>
-    {% if reservasUsu %}
-    <div class="grid-libros">
-        {% for r in reservasUsu %}
-            <div class="card-libro">
-                <p class="titulo">{{ r.titulo }}</p>
-                <img src="{{ url_for('static', filename='images/' + r.imagen) }}" alt="">
-                <p class="descripcion">
-                    {{ r.descripcion}}
-                </p>
-        </div>
-        {% endfor %}
-        </div>
-    {% else %}
-        <p>No hay reservas</p>
-    {% endif %}
+{% if reservasUsu %}
+<div class="grid-libros">
+    {% for r in reservasUsu %}
+    <div class="card-libro">
+        <p class="titulo">{{ r.titulo }}</p>
+        <img src="{{ url_for('static', filename='images/' + r.imagen) }}" alt="">
+        <p class="descripcion">
+            {{ r.descripcion}}
+        </p>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<p>No hay reservas</p>
+{% endif %}
 {% endblock %}

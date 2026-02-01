@@ -1,52 +1,58 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="utf-8">
     <title>{% block title %}{% endblock %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
+
 <body>
 
-<header>
-    <nav>
-        <ul>
-            {% if not session.get('nombre') %}
+    <header>
+        <nav>
+            <ul>
+                {% if not session.get('nombre') %}
                 <li><a href="{{ url_for('login.login') }}">Iniciar sesión</a></li>
                 <li><a href="{{ url_for('signin.signin') }}">Crear cuenta</a></li>
-            {% else %}
+                {% else %}
 
                 <li><a href="{{ url_for('libros.ver_libros') }}">Ver Libro</a></li>
 
                 {% if session.get('admin') %}
-                    <li><a href="{{ url_for('admin.adminpanel') }}">Panel Admin</a></li>
-                    <li><a href="{{ url_for('admin.mostrarCsv') }}">Importar csv</a></li>
+                <li><a href="{{ url_for('admin.adminpanel') }}">Panel Admin</a></li>
+                <li><a href="{{ url_for('admin.mostrarCsv') }}">Importar csv</a></li>
                 {% else %}
-                        <li><a href="{{ url_for('reservas.ver_reservas') }}">Ver Reservas</a></li>
+                <li><a href="{{ url_for('reservas.ver_reservas') }}">Ver Reservas</a></li>
 
                 {% endif %}
 
                 <li><a href="{{ url_for('logout.logout') }}">Cerrar sesión</a></li>
-            {% endif %}
-        </ul>
-    </nav>
-</header>
+                {% endif %}
+            </ul>
 
-<main>
-    {% with messages = get_flashed_messages(with_categories=true) %}
+
+        </nav>
+        <h1>COGE LO TUYO</h1>
+    </header>
+
+    <main>
+        {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
-            <div class="mensajes">
-                {% for category, message in messages %}
-                    <div class="mensaje {{ category }}">
-                        {{ message }}
-                    </div>
-                {% endfor %}
+        <div class="mensajes">
+            {% for category, message in messages %}
+            <div class="mensaje {{ category }}">
+                {{ message }}
             </div>
+            {% endfor %}
+        </div>
         {% endif %}
-    {% endwith %}
+        {% endwith %}
 
-    {% block content %}{% endblock %}
-</main>
+        {% block content %}{% endblock %}
+    </main>
 
 </body>
+
 </html>
