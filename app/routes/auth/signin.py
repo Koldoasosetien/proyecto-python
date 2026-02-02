@@ -5,6 +5,21 @@ signin_bp = Blueprint('signin', __name__, template_folder="../../../templates")
 
 @signin_bp.route("/signin", methods=["GET", "POST"])
 def signin():
+    """
+        Gestiona el registro de nuevos usuarios.
+
+        - Si el usuario ya ha iniciado sesión, se redirige a la vista principal
+        de libros.
+        - En una petición POST, valida los datos introducidos en el formulario
+        de registro.
+        - Comprueba si el correo electrónico ya está registrado en el sistema.
+        - Si no existe, crea un nuevo usuario y muestra un mensaje de éxito.
+        - En caso de error, muestra el mensaje correspondiente.
+
+        Returns:
+            Response: Renderiza la plantilla de registro o redirige al login
+            tras un registro exitoso.
+    """
     
     # Si ya está logueado
     if flask_session.get("usuario_id") or flask_session.get("nombre"):

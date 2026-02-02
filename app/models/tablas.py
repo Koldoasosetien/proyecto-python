@@ -7,6 +7,13 @@ Base = declarative_base()
 
 
 class Usuarios(Base):
+    """
+        Modelo que representa a los usuarios del sistema.
+
+        Almacena la información básica de cada usuario, incluyendo
+        sus datos personales.
+    """
+
     __tablename__ = "usuarios"
     id = Column(Integer, primary_key=True)
     nombre = Column(String)
@@ -17,6 +24,12 @@ class Usuarios(Base):
     admin = Column(Boolean)
 
 class Libro(Base):
+    """
+        Modelo que representa los libros disponibles en la biblioteca.
+
+        Contiene la información descriptiva de cada libro.
+    """
+    
     __tablename__ = 'libros'
     
     id = Column(Integer, primary_key=True)
@@ -28,6 +41,13 @@ class Libro(Base):
     descripcion = Column(String)
 
 class Prestamos(Base):
+    """
+        Modelo que representa los préstamos de libros realizados por los usuarios.
+
+        Relaciona un usuario con un libro y almacena la fecha del préstamo
+        junto con el estado de devolución.
+    """
+    
     __tablename__ = 'prestamos'
     
     id = Column(Integer, primary_key=True)
