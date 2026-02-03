@@ -112,8 +112,9 @@ def CrearCsv():
     if reservas:
         with open("reservas.csv", "w", newline='', encoding="utf-8") as f:
             campos = ["ID", "Usuario ID", "Libro ID", "Fecha Prestamo", "Devuelto"]
-            escritor = csv.DictWriter(f, fieldnames=campos)
+            escritor = csv.DictWriter(f, fieldnames=campos) # Crear el escritor CSV usando diccionarios
             escritor.writeheader()
+            # Recorrer las reservas y escribir cada una como fila
             for r in reservas:
                 escritor.writerow({"ID": r.id,"Usuario ID": r.usuario_id, "Libro ID": r.libros_id,"Fecha Prestamo": r.fechaprestamos,"Devuelto": r.devuelto})
         flash("CSV Creado", "msg")
@@ -135,6 +136,6 @@ def descargarCsv():
     
     return send_file(
         "../reservas.csv",
-        as_attachment=True,
+        as_attachment=True, # Forzar descarga sin abrir archivo
         download_name="reservas.csv"
     )
